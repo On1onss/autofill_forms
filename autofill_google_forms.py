@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from random import choice
 
 # Все XPATH кнопок, которые нужно нажать
 XPATH_all_buttons = []
