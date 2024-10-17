@@ -49,6 +49,3 @@ def autofill_google(number_number=number, url_forms=url):
 variables()
 # Запускаем автозаполнение
 autofill_google()
-
-
-
