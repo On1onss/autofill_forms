@@ -12,6 +12,8 @@
 - [x] Random selection 
 - - [x] Refactor random selection
 - [x] Add a choice of answers
+- [ ] Add the ability to select multiple options
+- [ ] Add text selection option
 - [ ] Extend the functionality to other forms as well
 
 <!--Installation-->
