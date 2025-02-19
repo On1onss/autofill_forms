@@ -11,7 +11,7 @@
 ### ToDo:
 - [x] Random selection 
 - - [x] Refactor random selection
-- [ ] Add a choice of answers
+- [x] Add a choice of answers
 - [ ] Extend the functionality to other forms as well
 
 <!--Installation-->
