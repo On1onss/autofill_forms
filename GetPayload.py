@@ -4,14 +4,14 @@ import random
 import ast
 
 
-# Maybe deleted?
-def html_encode(s):
-    return ''.join('&#x{:06x};'.format(ord(c)) for c in s)
-
-
 def get_questions(url):
     try:
-        html = requests.get(url).text
+        request = requests.get(url)
+
+        if request.status_code != 200:
+            return "Error"
+
+        html = request.text
         soup = LxmlSoup(html)
         list_items = soup.find_all("div")
 
@@ -34,25 +34,25 @@ def get_questions(url):
 
         return questions
 
-    except ValueError:
+    except:
         return "Error"
 
 
-def get_random_payload(url):
-    questions = get_questions(url)
+def get_random_payload(questions):
     payload = ''
+    try:
+        for question in questions:
+            answers = question[0][3][0][1]
+            payload += f"entry.{question[0][3][0][0]}={random.choice(answers)[0]}&"
 
-    for question in questions:
-        answers = question[0][3][0][1]
-        payload += f"entry.{question[0][0]}={random.choice(answers)[0]}&"
-
-    return payload
+        return payload
+    except:
+        return "Error"
 
 
 # Test function
-def interactive(url):
+def interactive(questions):
 
-    questions = get_questions(url)
     print(f"Form contain {len(questions)} questions")
     payload = ''
 
@@ -67,7 +67,7 @@ def interactive(url):
             try:
                 choice = int(input("Enter number of choice:"))
 
-                if choice > len(answers) or choice < 0:
+                if choice > len(answers) or choice <= 0:
                     print("The number is higher or lower than it should be")
                     continue
 
@@ -77,6 +77,6 @@ def interactive(url):
                 print("Error. Enter NUMBER if choice")
                 continue
 
-        payload += f"entry.{question[0][0]}={answers[answer_idx - 1][0]}&"
+        payload += f"entry.{question[0][3][0][0]}={answers[answer_idx - 1][0]}&"
 
     return payload

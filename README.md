@@ -24,7 +24,7 @@ pip install -r requirements.txt
 <!--Launch-->
 ## Launch
 ```Shell
-python main.py
+python authofill.py
 ```
 
 
