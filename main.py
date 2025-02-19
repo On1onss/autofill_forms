@@ -1,5 +1,5 @@
 import requests
-from GetPayload import get_payload
+from GetPayload import get_random_payload
 
 url = input("Enter url: ")
 number = input("Enter the number of iterations: ")
@@ -9,11 +9,13 @@ headers = {
     "Content-Type": "application/x-www-form-urlencoded"
 }
 
-payload = get_payload(url)
+payload = get_random_payload(url)
+print(payload)
 
 
 if payload != "Error" and payload != "" and number.isdigit():
     url = "/".join(url.split("/")[:-1:]) + "/formResponse"
+    print(url)
 
     for i in range(int(number)):
         r = requests.post(url, data=payload,  headers=headers)

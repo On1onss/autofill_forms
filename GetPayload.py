@@ -1,46 +1,75 @@
 from LxmlSoup import LxmlSoup
 import requests
 import random
-import urllib.parse
-
-items_to_be_deleted = ["[", "null", "false", ",", "]", "true", ""]
+import ast
 
 
+# Maybe deleted?
 def html_encode(s):
     return ''.join('&#x{:06x};'.format(ord(c)) for c in s)
 
 
-def delete_items(string, database):
-    statement = string
-
-    for x in range(0, len(database)):
-
-        if items_to_be_deleted[x] in statement:
-            statement = statement.replace(items_to_be_deleted[x], "")
-
-    return statement
-
-
-def get_payload(url):
+def get_questions(url):
     try:
         html = requests.get(url).text
         soup = LxmlSoup(html)
         list_items = soup.find_all("div")
 
-        jsmodels = []
+        questions = []
 
         for item in list_items:
-
+            idx = 0
             if item.has_attr("data-params"):
-                jsmodels.append(item.get("data-params"))
+                for _ in item.get("data-params"):
+                    if _ == "[":
+                        break
+                    idx += 1
 
-        payload = ""
+                questions.append(ast.literal_eval("[" + item.get("data-params")[idx:].
+                                                  replace("null,", "").
+                                                  replace("false,", "").
+                                                  replace("true,", "").
+                                                  replace("false", "").
+                                                  replace("true,", "")))
 
-        for jsmodel in jsmodels:
-            word = delete_items(jsmodel, items_to_be_deleted)
-            list_number_and_answer = [x for x in word[4::].split('"') if x != ""]
-            payload += f"entry.{list_number_and_answer[:-4][2][1::]}={urllib.parse.quote(random.choice(list_number_and_answer[3:-4]))}&"
+        return questions
 
-        return payload
     except ValueError:
         return "Error"
+
+
+def get_random_payload(url):
+    questions = get_questions(url)
+    payload = ''
+
+    for question in questions:
+        answers = question[0][3][0][1]
+        payload += f"entry.{question[0][0]}={random.choice(answers)[0]}&"
+
+    return payload
+
+
+# Test function
+def interactive():
+    url = "https://docs.google.com/forms/d/e/1FAIpQLSeDdCIF3K4gHhJx3iTyGjjqkWf0_n_Avh9F_a01vkrRF8yVMQ/viewform"
+
+    questions = get_questions(url)
+    text = get_questions(url)[0]
+    text1 = get_questions(url)[1]
+
+    print(f"Form contain {len(questions)} questions")
+
+    for number, question in enumerate(questions):
+        answers = question[0][3][0][1]
+        print(f"Question {number + 1}: {question[0][1]}")
+        for idx, answer in enumerate(answers):
+            print(f"\tAnswer {idx + 1}: {answer[0]}")
+
+    question = text[0][1]
+    answers = text[0][3][0][1]
+    print("Question:", question)
+    for i, answer in enumerate(answers):
+        print(i + 1, answer[0])
+    print(text1[0][3][0][1])
+
+    print(get_random_payload(url))
