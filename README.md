@@ -9,7 +9,8 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/On1onss/autofill_forms)
 
 ### ToDo:
-- [x] Random selection
+- [x] Random selection 
+- - [x] Refactor random selection
 - [ ] Add a choice of answers
 - [ ] Extend the functionality to other forms as well
 
