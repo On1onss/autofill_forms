@@ -1,6 +1,7 @@
 import requests
 from GetPayload import get_random_payload
 
+choice = input("Random? (Y, N):")
 url = input("Enter url: ")
 number = input("Enter the number of iterations: ")
 

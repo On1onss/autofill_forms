@@ -50,26 +50,33 @@ def get_random_payload(url):
 
 
 # Test function
-def interactive():
-    url = "https://docs.google.com/forms/d/e/1FAIpQLSeDdCIF3K4gHhJx3iTyGjjqkWf0_n_Avh9F_a01vkrRF8yVMQ/viewform"
+def interactive(url):
 
     questions = get_questions(url)
-    text = get_questions(url)[0]
-    text1 = get_questions(url)[1]
-
     print(f"Form contain {len(questions)} questions")
+    payload = ''
 
     for number, question in enumerate(questions):
         answers = question[0][3][0][1]
         print(f"Question {number + 1}: {question[0][1]}")
+        answer_idx = 0
         for idx, answer in enumerate(answers):
             print(f"\tAnswer {idx + 1}: {answer[0]}")
 
-    question = text[0][1]
-    answers = text[0][3][0][1]
-    print("Question:", question)
-    for i, answer in enumerate(answers):
-        print(i + 1, answer[0])
-    print(text1[0][3][0][1])
+        while True:
+            try:
+                choice = int(input("Enter number of choice:"))
 
-    print(get_random_payload(url))
+                if choice > len(answers) or choice < 0:
+                    print("The number is higher or lower than it should be")
+                    continue
+
+                answer_idx = choice
+                break
+            except:
+                print("Error. Enter NUMBER if choice")
+                continue
+
+        payload += f"entry.{question[0][0]}={answers[answer_idx - 1][0]}&"
+
+    return payload
