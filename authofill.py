@@ -1,6 +1,5 @@
 import requests
-from GetPayload import get_random_payload
-from authofill_forms.GetPayload import interactive, get_questions
+from GetPayload import get_random_payload, interactive, get_questions
 
 banner = r'''             _    _   _______   _    _    ____    ______   _____   _        _      
      /\     | |  | | |__   __| | |  | |  / __ \  |  ____| |_   _| | |      | |     
@@ -55,7 +54,7 @@ if choice == "R" or choice == "r":
 
         if payload != "Error" and payload != "":
             url = "/".join(url.split("/")[:-1:]) + "/formResponse"
-            r = requests.post(url, data=payload,  headers=headers)
+            r = requests.post(url, data=payload, headers=headers)
 
             if r.status_code == 200:
                 print(".", end='')
@@ -77,7 +76,7 @@ elif choice == "I" or choice == "i":
 
         if payload != "Error" and payload != "":
             url = "/".join(url.split("/")[:-1:]) + "/formResponse"
-            r = requests.post(url, data=payload,  headers=headers)
+            r = requests.post(url, data=payload, headers=headers)
 
             if r.status_code == 200:
                 print(".", end='')
@@ -88,5 +87,3 @@ elif choice == "I" or choice == "i":
             print("Error")
 
     print(f"\nSuccessfully. Sent {count} data")
-
-
