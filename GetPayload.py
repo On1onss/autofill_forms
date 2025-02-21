@@ -34,8 +34,8 @@ def get_questions(url):
 
         return questions
 
-    except ValueError as e:
-        return e#"Error"
+    except:
+        return "Error"
 
 
 def get_random_payload(questions):
