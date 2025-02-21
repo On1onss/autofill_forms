@@ -9,22 +9,33 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/On1onss/autofill_forms)
 
 ### ToDo:
-- [x] Random selection 
-- - [x] Refactor random selection
-- [x] Add a choice of answers
+- [x] Random selection
+  - [x] Refactor random selection
 - [ ] Add the ability to select multiple options
-- [ ] Add text selection option
+- [ ] Add Short
+- [ ] Add Long
+- [x] Add Choice
+- [ ] Add DropDown
+- [ ] Add Checkbox
+- [ ] Add Liner
+- [ ] Add ChoiceGrid
+- [ ] Add CheckBoxGrid
+- [ ] Add Date
+- [ ] Add Time
+- [ ] Add Raiting
 - [ ] Extend the functionality to other forms as well
 
 <!--Installation-->
 ## Installation
 
 ```Shell
+git clone https://github.com/On1onss/autofill_forms.git
+cd autofill_forms
 pip install -r requirements.txt
 ```
 
 <!--Launch-->
-## Launch
+## Usage
 ```Shell
 python authofill.py
 ```

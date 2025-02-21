@@ -30,12 +30,12 @@ def get_questions(url):
                                                   replace("false,", "").
                                                   replace("true,", "").
                                                   replace("false", "").
-                                                  replace("true,", "")))
+                                                  replace("true", "")))
 
         return questions
 
-    except:
-        return "Error"
+    except ValueError as e:
+        return e#"Error"
 
 
 def get_random_payload(questions):
