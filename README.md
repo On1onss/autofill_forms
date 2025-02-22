@@ -43,13 +43,12 @@
 ```Shell
 git clone https://github.com/On1onss/autofill_forms.git
 cd autofill_forms
-pip install -r requirements.txt
 ```
 
 <!--Launch-->
 ## Usage
 ```Shell
-python authofill.py
+uv run authofill.py
 ```
 
 

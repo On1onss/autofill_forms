@@ -1,0 +1,10 @@
+[project]
+name = "authofill-forms"
+version = "0.1.0"
+description = "Autofill Forms"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "lxmlsoup>=1.5.2",
+    "requests>=2.32.3",
+]
