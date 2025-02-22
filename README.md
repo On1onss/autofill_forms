@@ -22,7 +22,7 @@
 - [ ] Add CheckBoxGrid
 - [ ] Add Date
 - [ ] Add Time
-- [ ] Add Raiting
+- [ ] Add Rating
 - [ ] Extend the functionality to other forms as well
 
 <!--Installation-->
