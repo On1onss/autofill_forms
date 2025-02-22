@@ -11,18 +11,30 @@
 ### ToDo:
 - [x] Random selection
   - [x] Refactor random selection
-- [ ] Add the ability to select multiple options
-- [ ] Add Short
-- [ ] Add Long
-- [x] Add Choice
-- [ ] Add DropDown
-- [ ] Add Checkbox
-- [ ] Add Liner
-- [ ] Add ChoiceGrid
-- [ ] Add CheckBoxGrid
-- [ ] Add Date
-- [ ] Add Time
-- [ ] Add Rating
+  - [ ] Add Short
+  - [ ] Add Long
+  - [x] Add Choice
+  - [ ] Add DropDown
+  - [ ] Add Checkbox
+  - [ ] Add Liner
+  - [ ] Add ChoiceGrid
+  - [ ] Add CheckBoxGrid
+  - [ ] Add Date
+  - [ ] Add Time
+  - [ ] Add Rating
+- [x] Interactive selection
+  - [x] Add the ability to select multiple options
+  - [x] Add Short
+  - [x] Add Long
+  - [x] Add Choice
+  - [x] Add DropDown
+  - [x] Add Checkbox
+  - [x] Add Liner
+  - [x] Add ChoiceGrid
+  - [x] Add CheckBoxGrid
+  - [x] Add Date
+  - [x] Add Time
+  - [x] Add Rating
 - [ ] Extend the functionality to other forms as well
 
 <!--Installation-->
