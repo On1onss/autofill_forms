@@ -11,17 +11,17 @@
 ### ToDo:
 - [x] Random selection
   - [x] Refactor random selection
-  - [ ] Add Short
-  - [ ] Add Long
+  - [x] Add Short
+  - [x] Add Long
   - [x] Add Choice
-  - [ ] Add DropDown
-  - [ ] Add Checkbox
-  - [ ] Add Liner
-  - [ ] Add ChoiceGrid
-  - [ ] Add CheckBoxGrid
-  - [ ] Add Date
-  - [ ] Add Time
-  - [ ] Add Rating
+  - [x] Add DropDown
+  - [x] Add Checkbox
+  - [x] Add Liner
+  - [x] Add ChoiceGrid
+  - [x] Add CheckBoxGrid
+  - [x] Add Date
+  - [x] Add Time
+  - [x] Add Rating
 - [x] Interactive selection
   - [x] Add the ability to select multiple options
   - [x] Add Short
@@ -43,9 +43,10 @@
 ```Shell
 git clone https://github.com/On1onss/autofill_forms.git
 cd autofill_forms
+uv sync
 ```
 
-<!--Launch-->
+<!--Usage-->
 ## Usage
 ```Shell
 uv run authofill.py

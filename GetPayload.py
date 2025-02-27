@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from LxmlSoup import LxmlSoup
 import requests
 import random
@@ -132,9 +134,46 @@ def get_answers(question):
 def get_random_payload(questions):
     payload = ''
     try:
-        for question in questions:
-            answers = question[0][3][0][1]
-            payload += f"entry.{question[0][3][0][0]}={random.choice(answers)[0]}&"
+        for number, question in enumerate(questions):
+
+            answers, type_of_question = get_answers(question)
+
+            if answers == "Error":
+                print(f"{answers}. Type {type_of_question} not supported. Question: \"{question}\"")
+                continue
+
+            # print(f"Question {number + 1}: \"{question[0][1]}\"")
+
+            answer_idx = 0
+            text_answer = 'some text'
+
+            if type_of_question == 7:
+                for id_raw, raw in enumerate(answers[0]):
+                    # print(f"\tRaw: \"{raw[0]}\"")
+                    # for id_column, column in enumerate(answers[1]):
+                    #     print(f"\t\tAnswer {id_column + 1}: \"{column[0]}\"")
+
+                    payload += f"entry.{question[0][3][id_raw][0]}={answers[1][random.randint(0, len(answers) - 1)][0]}&"
+            else:
+                # for idx, answer in enumerate(answers):
+                #     print(f"\tAnswer {idx + 1}: \"{answer[0]}\"")
+
+                if type_of_question == 0 or type_of_question == 1:
+                    payload += f"entry.{question[0][3][0][0]}={text_answer}&"
+                elif type_of_question == 4:
+                    answer_idx = [random.randint(0, len(answers) - 1) for _ in range(len(answers))]
+                    for idx in answer_idx:
+                        payload += f"entry.{question[0][3][0][0]}={answers[idx][0]}&"
+                elif type_of_question == 9:
+
+                    payload += f"entry.{question[0][3][0][0]}_year={datetime.now().year}&"
+                    payload += f"entry.{question[0][3][0][0]}_month={datetime.now().month}&"
+                    payload += f"entry.{question[0][3][0][0]}_day={datetime.now().day}&"
+                elif type_of_question == 10:
+                    payload += f"entry.{question[0][3][0][0]}_hour={datetime.now().hour}&"
+                    payload += f"entry.{question[0][3][0][0]}_minute={datetime.now().minute}&"
+                else:
+                    payload += f"entry.{question[0][3][0][0]}={answers[random.randint(0, len(answers) - 1)][0]}&"
 
         return payload
     except:
