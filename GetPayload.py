@@ -293,12 +293,20 @@ def interactive(questions):
                 for idx in answer_idx:
                     payload += f"entry.{question[0][3][0][0]}={answers[idx - 1][0]}&"
             elif type_of_question == 9:
-                payload += f"entry.{question[0][3][0][0]}_year={answer_idx[2]}&"
-                payload += f"entry.{question[0][3][0][0]}_month={answer_idx[1]}&"
-                payload += f"entry.{question[0][3][0][0]}_day={answer_idx[0]}&"
+                # TODO: Add check data
+                try:
+                    payload += f"entry.{question[0][3][0][0]}_year={answer_idx[2]}&"
+                    payload += f"entry.{question[0][3][0][0]}_month={answer_idx[1]}&"
+                    payload += f"entry.{question[0][3][0][0]}_day={answer_idx[0]}&"
+                except:
+                    print("Error input data")
             elif type_of_question == 10:
-                payload += f"entry.{question[0][3][0][0]}_hour={answer_idx[0]}&"
-                payload += f"entry.{question[0][3][0][0]}_minute={answer_idx[1]}&"
+                # TODO: Add check time
+                try:
+                    payload += f"entry.{question[0][3][0][0]}_hour={answer_idx[0]}&"
+                    payload += f"entry.{question[0][3][0][0]}_minute={answer_idx[1]}&"
+                except:
+                    print("Error input time")
             else:
                 payload += f"entry.{question[0][3][0][0]}={answers[answer_idx - 1][0]}&"
 

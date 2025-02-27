@@ -1,3 +1,6 @@
+import datetime
+import time
+
 import requests
 from GetPayload import get_random_payload, interactive, get_questions
 
@@ -45,9 +48,10 @@ headers = {
     "Content-Type": "application/x-www-form-urlencoded"
 }
 
-print("Send data...")
 
 if choice == "R" or choice == "r":
+    start_time = time.time()
+    print(f"Start sending data to: {datetime.datetime.now()}")
     count = 0
     print("\n")
     for _ in range(number):
@@ -63,12 +67,13 @@ if choice == "R" or choice == "r":
                 print(f"\nError. Status code {r.status_code}")
         else:
             print("Error")
-
-    print(f"\nSuccessfully. Sent {count} data")
+    end_time = time.time()
+    print(f"\nSuccessfully. Sent {count} data. It took some time to send: {end_time - start_time:2f}s")
 
 elif choice == "I" or choice == "i":
     payload = interactive(questions)
-    print("Send data.", end='')
+    start_time = time.time()
+    print(f"Start sending data to: {datetime.datetime.now()}")
     count = 0
 
     for _ in range(number):
@@ -85,4 +90,5 @@ elif choice == "I" or choice == "i":
         else:
             print("Error")
 
-    print(f"\nSuccessfully. Sent {count} data")
+    end_time = time.time()
+    print(f"\nSuccessfully. Sent {count} data. It took some time to send: {end_time - start_time:2f}s")
