@@ -45,10 +45,11 @@ headers = {
     "Content-Type": "application/x-www-form-urlencoded"
 }
 
-if choice == "R" or choice == "r":
-    print("Send data.", end='')
-    count = 0
+print("Send data...")
 
+if choice == "R" or choice == "r":
+    count = 0
+    print("\n")
     for _ in range(number):
         payload = get_random_payload(questions)
 
@@ -57,11 +58,9 @@ if choice == "R" or choice == "r":
             r = requests.post(url, data=payload, headers=headers)
 
             if r.status_code == 200:
-                print(".", end='')
                 count += 1
             else:
                 print(f"\nError. Status code {r.status_code}")
-                print("Send.")
         else:
             print("Error")
 
