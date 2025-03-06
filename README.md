@@ -49,7 +49,7 @@ uv sync
 <!--Usage-->
 ## Usage
 ```Shell
-uv run authofill.py
+uv run autofill.py
 ```
 
 
