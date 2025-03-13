@@ -1,5 +1,6 @@
 import datetime
 import time
+import urllib.parse
 
 import requests
 from GetPayload import get_random_payload, interactive, get_questions
@@ -56,6 +57,7 @@ if choice == "R" or choice == "r":
     print("\n")
     for _ in range(number):
         payload = get_random_payload(questions)
+        payload = urllib.parse.quote_plus(payload)
 
         if payload != "Error" and payload != "":
             url = "/".join(url.split("/")[:-1:]) + "/formResponse"
