@@ -74,6 +74,7 @@ if choice == "R" or choice == "r":
 
 elif choice == "I" or choice == "i":
     payload = interactive(questions)
+    payload = urllib.parse.quote_plus(payload)
     start_time = time.time()
     print(f"Start sending data to: {datetime.datetime.now()}")
     count = 0
