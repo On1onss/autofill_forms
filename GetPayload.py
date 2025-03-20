@@ -1,4 +1,5 @@
 from datetime import datetime
+import urllib.parse
 
 from LxmlSoup import LxmlSoup
 import requests
@@ -142,38 +143,38 @@ def get_random_payload(questions):
                 print(f"{answers}. Type {type_of_question} not supported. Question: \"{question}\"")
                 continue
 
-            # print(f"Question {number + 1}: \"{question[0][1]}\"")
 
             answer_idx = 0
             text_answer = 'some text'
 
             if type_of_question == 7:
                 for id_raw, raw in enumerate(answers[0]):
-                    # print(f"\tRaw: \"{raw[0]}\"")
-                    # for id_column, column in enumerate(answers[1]):
-                    #     print(f"\t\tAnswer {id_column + 1}: \"{column[0]}\"")
 
-                    payload += f"entry.{question[0][3][id_raw][0]}={answers[1][random.randint(0, len(answers) - 1)][0]}&"
+                    payload += f"entry.{question[0][3][id_raw][0]}={urllib.parse.quote_plus(str(answers[1][random.randint(0, len(answers) - 1)][0]))}&"
             else:
-                # for idx, answer in enumerate(answers):
-                #     print(f"\tAnswer {idx + 1}: \"{answer[0]}\"")
 
                 if type_of_question == 0 or type_of_question == 1:
-                    payload += f"entry.{question[0][3][0][0]}={text_answer}&"
+                    payload += f"entry.{question[0][3][0][0]}={urllib.parse.quote_plus(str(text_answer))}&"
                 elif type_of_question == 4:
-                    answer_idx = [random.randint(0, len(answers) - 1) for _ in range(len(answers))]
+                    answer_idx = []
+                    for _ in range(len(answers)):
+                        rand_answer = random.randint(0, len(answers) - 1)
+                        if rand_answer in answer_idx:
+                            continue
+                        answer_idx.append(rand_answer)
+
                     for idx in answer_idx:
-                        payload += f"entry.{question[0][3][0][0]}={answers[idx][0]}&"
+                        payload += f"entry.{question[0][3][0][0]}={urllib.parse.quote_plus(str(answers[idx][0]))}&"
                 elif type_of_question == 9:
 
-                    payload += f"entry.{question[0][3][0][0]}_year={datetime.now().year}&"
-                    payload += f"entry.{question[0][3][0][0]}_month={datetime.now().month}&"
-                    payload += f"entry.{question[0][3][0][0]}_day={datetime.now().day}&"
+                    payload += f"entry.{question[0][3][0][0]}_year={urllib.parse.quote_plus(str(datetime.now().year))}&"
+                    payload += f"entry.{question[0][3][0][0]}_month={urllib.parse.quote_plus(str(datetime.now().month))}&"
+                    payload += f"entry.{question[0][3][0][0]}_day={urllib.parse.quote_plus(str(datetime.now().day))}&"
                 elif type_of_question == 10:
-                    payload += f"entry.{question[0][3][0][0]}_hour={datetime.now().hour}&"
-                    payload += f"entry.{question[0][3][0][0]}_minute={datetime.now().minute}&"
+                    payload += f"entry.{question[0][3][0][0]}_hour={urllib.parse.quote_plus(str(datetime.now().hour))}&"
+                    payload += f"entry.{question[0][3][0][0]}_minute={urllib.parse.quote_plus(str(datetime.now().minute))}&"
                 else:
-                    payload += f"entry.{question[0][3][0][0]}={answers[random.randint(0, len(answers) - 1)][0]}&"
+                    payload += f"entry.{question[0][3][0][0]}={urllib.parse.quote_plus(answers[random.randint(0, len(answers) - 1)][0])}&"
 
         return payload
     except:
@@ -218,7 +219,7 @@ def interactive(questions):
                     except:
                         print("Error. Enter NUMBER of choice")
                         continue
-                payload += f"entry.{question[0][3][id_raw][0]}={answers[1][answer_idx - 1][0]}&"
+                payload += f"entry.{question[0][3][id_raw][0]}={urllib.parse.quote_plus(answers[1][answer_idx - 1][0])}&"
         else:
             for idx, answer in enumerate(answers):
                 print(f"\tAnswer {idx + 1}: \"{answer[0]}\"")
@@ -288,26 +289,26 @@ def interactive(questions):
                         continue
 
             if type_of_question == 0 or type_of_question == 1:
-                payload += f"entry.{question[0][3][0][0]}={text_answer}&"
+                payload += f"entry.{question[0][3][0][0]}={urllib.parse.quote_plus(text_answer)}&"
             elif type_of_question == 4:
                 for idx in answer_idx:
-                    payload += f"entry.{question[0][3][0][0]}={answers[idx - 1][0]}&"
+                    payload += f"entry.{question[0][3][0][0]}={urllib.parse.quote_plus(answers[idx - 1][0])}&"
             elif type_of_question == 9:
                 # TODO: Add check data
                 try:
-                    payload += f"entry.{question[0][3][0][0]}_year={answer_idx[2]}&"
-                    payload += f"entry.{question[0][3][0][0]}_month={answer_idx[1]}&"
-                    payload += f"entry.{question[0][3][0][0]}_day={answer_idx[0]}&"
+                    payload += f"entry.{question[0][3][0][0]}_year={urllib.parse.quote_plus(answer_idx[2])}&"
+                    payload += f"entry.{question[0][3][0][0]}_month={urllib.parse.quote_plus(answer_idx[1])}&"
+                    payload += f"entry.{question[0][3][0][0]}_day={urllib.parse.quote_plus(answer_idx[0])}&"
                 except:
                     print("Error input data")
             elif type_of_question == 10:
                 # TODO: Add check time
                 try:
-                    payload += f"entry.{question[0][3][0][0]}_hour={answer_idx[0]}&"
-                    payload += f"entry.{question[0][3][0][0]}_minute={answer_idx[1]}&"
+                    payload += f"entry.{question[0][3][0][0]}_hour={urllib.parse.quote_plus(answer_idx[0])}&"
+                    payload += f"entry.{question[0][3][0][0]}_minute={urllib.parse.quote_plus(answer_idx[1])}&"
                 except:
                     print("Error input time")
             else:
-                payload += f"entry.{question[0][3][0][0]}={answers[answer_idx - 1][0]}&"
+                payload += f"entry.{question[0][3][0][0]}={urllib.parse.quote_plus(answers[answer_idx - 1][0])}&"
 
     return payload
